@@ -73,6 +73,11 @@ class VidgameScraper::CLI
         #     puts "Sorry idk what i am doing."
         # end
 
+        if category.deals.empty?
+            VidgameScraper::Scraper.scrape_items(category)
+        end
+
+
         puts "Here are the deals for #{category.name}:\n"
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
