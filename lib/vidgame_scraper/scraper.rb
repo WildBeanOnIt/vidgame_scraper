@@ -28,23 +28,22 @@ class VidgameScraper::Scraper
             location = card.css("h1.postingtitle").css("span.postingtitletext").css("small").text.strip  #shows the date when posted.
             condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
             time_posted = date = card.css("#display-date").css("time").text.strip.split(" ")[0]
-            first_condition = card.css("p.attrgroup span").first.children[0].text # => "condition: "
+            first_condition = card.css("p.attrgroup span").first.children[0].text.strip # => "condition: "
             sec_condition = card.css("p.attrgroup span").first.children[1].text.strip # => "new"
+            number_condition_left = card.css("p.attrgroup span").children[4].text.strip # => "model name / number:"
+            number_condition_right = card.css("p.attrgroup span").children[5].text.strip # => "model name / number:"
             make = card.css("p.attrgroup span").children[2].text.strip
             brand = card.css("p.attrgroup span").children[3].text.strip
             description = card.css("#postingbody").inner_text.gsub("  ", "").gsub("QR Code Link to This Post", "").gsub("\n", "").gsub("-", " -") #shwos desc.
             notice = card.css("ul.notices").css("li").text # shows the bullet point desc.
-            
-
-            # name_and_price = card.css(".postingtitletext").text.strip.split(" - ")
-
-            # deal.product = name_and_price[0]
-            # deal.price = name_and_price[1]
+            #################
             deal.title = title
             deal.price = price
             deal.location = location
             deal.first_condition = first_condition
             deal.sec_condition = sec_condition
+            deal.number_condition_left = number_condition_left
+            deal.number_condition_right = number_condition_right
             deal.make = make
             deal.brand = brand
             deal.time_posted = time_posted

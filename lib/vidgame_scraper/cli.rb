@@ -70,23 +70,10 @@ class VidgameScraper::CLI
             VidgameScraper::Scraper.scrape_items(category)
         end
 
-        # if category.description == []
-        #     VidgameScraper::Scraper.scrape_items(category)
-        # end
-
-        # if category.deals == []
-        #     VidgameScraper::Scraper.scrape_items(category)
-
-        #     puts "Sorry idk what i am doing."
-        # end
-
         puts "Here are the deals for #{category.name}:\n"
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
-            # puts "\nTitle: #{deal.title}" # if deal.product
-            # puts "Price: #{deal.price}" # if deal.price
-            # puts "Condition #{deal.condition}"
-            # puts deal.description
+            
             puts "\nItem Name: #{deal.title}"
             puts "Price: #{deal.price}"
 
@@ -98,6 +85,7 @@ class VidgameScraper::CLI
 
             puts "#{deal.first_condition} #{deal.sec_condition}"
             puts "#{deal.make} #{deal.brand}"
+            puts "#{deal.number_condition_left} #{deal.number_condition_right}"
             puts "Posted in (yyyy/mm/dd): #{deal.time_posted}"
             puts "Description: #{deal.description}"
             puts "Notce: #{deal.notice}"
