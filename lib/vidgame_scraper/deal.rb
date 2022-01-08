@@ -1,5 +1,7 @@
 class VidgameScraper::Deal
-    attr_accessor :product, :description, :price, :link, :category #, :notices
+    attr_accessor :description, :price, :category, :condition, :title,
+    :first_condition, :madeFrom, :location, :time_posted, :sec_condition,
+    :make, :brand, :notice
 
     @@all = []
 

@@ -23,17 +23,33 @@ class VidgameScraper::Scraper
             deal = VidgameScraper::Deal.new
 
             
-            title = card.css(".postingtitletext").text.strip #shows the title of the item.
-            condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
+            title = card.css("#titletextonly").text.strip #shows the title of the item.
             price = card.css(".price").text
-
-
-            name_and_price = card.css(".postingtitletext").text.strip.split("-")
-
+            location = card.css("h1.postingtitle").css("span.postingtitletext").css("small").text.strip  #shows the date when posted.
+            condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
+            time_posted = date = card.css("#display-date").css("time").text.strip.split(" ")[0]
+            first_condition = card.css("p.attrgroup span").first.children[0].text # => "condition: "
+            sec_condition = card.css("p.attrgroup span").first.children[1].text.strip # => "new"
+            make = card.css("p.attrgroup span").children[2].text.strip
+            brand = card.css("p.attrgroup span").children[3].text.strip
             description = card.css("#postingbody").inner_text.gsub("  ", "").gsub("QR Code Link to This Post", "").gsub("\n", "").gsub("-", " -") #shwos desc.
-            # notices = card.css("ul.notices").css("li").text # shows the bullet point desc.
-            deal.product = name_and_price[0]
-            deal.price = name_and_price[1]
+            notice = card.css("ul.notices").css("li").text # shows the bullet point desc.
+            
+
+            # name_and_price = card.css(".postingtitletext").text.strip.split(" - ")
+
+            # deal.product = name_and_price[0]
+            # deal.price = name_and_price[1]
+            deal.title = title
+            deal.price = price
+            deal.location = location
+            deal.first_condition = first_condition
+            deal.sec_condition = sec_condition
+            deal.make = make
+            deal.brand = brand
+            deal.time_posted = time_posted
+            deal.notice = notice
+            deal.description = description
 
             category.add_deal(deal)
             # binding.pry

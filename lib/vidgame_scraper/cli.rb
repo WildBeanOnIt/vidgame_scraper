@@ -64,28 +64,46 @@ class VidgameScraper::CLI
     end
 
     def display_category_items(category)    #once they pick the item
-        puts "One moment please while the code loads...".colorize(:green)
+        puts "\nOne moment please while the code loads...".colorize(:green)
         
-        # if category.description == []
-        #     VidgameScraper::Scraper.scrape_items(category)
-        # end
-        # if category.deals == []
-        #     puts "Sorry idk what i am doing."
-        # end
-
         if category.deals.empty?
             VidgameScraper::Scraper.scrape_items(category)
         end
 
+        # if category.description == []
+        #     VidgameScraper::Scraper.scrape_items(category)
+        # end
+
+        # if category.deals == []
+        #     VidgameScraper::Scraper.scrape_items(category)
+
+        #     puts "Sorry idk what i am doing."
+        # end
 
         puts "Here are the deals for #{category.name}:\n"
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
-            puts "\n#{index}. #{deal.product}"
-            puts "Price: $#{deal.price}"
+            # puts "\nTitle: #{deal.title}" # if deal.product
+            # puts "Price: #{deal.price}" # if deal.price
+            # puts "Condition #{deal.condition}"
+            # puts deal.description
+            puts "\nItem Name: #{deal.title}"
+            puts "Price: #{deal.price}"
+
+            if "#{deal.location}" == "#{deal.location}"
+                puts "Location: #{deal.location}"
+            else
+                puts "No location was posted sorry"
             end
+
+            puts "#{deal.first_condition} #{deal.sec_condition}"
+            puts "#{deal.make} #{deal.brand}"
+            puts "Posted in (yyyy/mm/dd): #{deal.time_posted}"
+            puts "Description: #{deal.description}"
+            puts "Notce: #{deal.notice}"
+            end
+            puts "\n"
         end
-        # sub_out
     end
 
     def sub_out 
@@ -93,7 +111,7 @@ class VidgameScraper::CLI
         answers = gets.strip.downcase
         case answers
         when "y"
-            start
+            menu
         when "n"
             exit_program
         else
