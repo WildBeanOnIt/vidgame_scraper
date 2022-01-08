@@ -77,16 +77,20 @@ class VidgameScraper::CLI
             puts "\nItem Name: #{deal.title}"
             puts "Price: #{deal.price}"
 
+            puts "-- Location being worked on --"
+            
             if "#{deal.location}" == "#{deal.location}"
                 puts "Location: #{deal.location}"
             else
-                puts "No location was posted sorry"
+                puts "Location: No location was listed"
             end
+
 
             puts "#{deal.first_condition} #{deal.sec_condition}"
             puts "#{deal.make} #{deal.brand}"
             puts "#{deal.number_condition_left} #{deal.number_condition_right}"
             puts "Posted in (yyyy/mm/dd): #{deal.time_posted}"
+            puts "#{deal.post_id}"
             puts "Description: #{deal.description}"
             puts "Notce: #{deal.notice}"
             end
