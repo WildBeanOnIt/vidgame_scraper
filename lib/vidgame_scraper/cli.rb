@@ -38,16 +38,17 @@ class VidgameScraper::CLI
     def list_items
         categories = VidgameScraper::Category.all
             puts "\nChoose which Item you want to see more info about:".colorize(:green)
-            #lists items
+            puts "\n"
             #responds to user input when they choose a category
 
         categories.each.with_index(1) do |category, index|
+            # sleep 1
             puts "#{index}. #{category.name}"
         end
     end
 
     def choose_item
-        puts "\nChoose a Item by typing a number:"
+        puts "\nChoose a Item by typing a number:".colorize(:green)
         input = gets.strip.to_i
         # VidgameScraper::Category.all.length
         max_value = VidgameScraper::Category.all.length
@@ -66,59 +67,46 @@ class VidgameScraper::CLI
     def display_category_items(category)    #once they pick the item
         puts "\nOne moment please while the code loads...".colorize(:green)
         puts "\n"
+        sleep 2
         if category.deals.empty?
             VidgameScraper::Scraper.scrape_items(category)
         end
 
-        puts "Here are the deals for " + "#{category.name}:\n".colorize(:blue)
+        puts "Here are the deals for " + "#{category.name}:\n".colorize(:yellow)
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
-            puts "\nItem Name: #{deal.title}"
-            puts "-------------------------------------------"
-            puts "Price: #{deal.price}"
-            puts "-------------------------------------------"
-            
+            puts "\nItem Name:".colorize(:blue) + " #{deal.title}"
+            puts "Price:".colorize(:blue) + " #{deal.price}"
+
             # puts "-- Location being worked on --"
-            
             # if "#{deal.location}" == "#{deal.location}"
             #     puts "Location: #{deal.location}"
             # else
             #     puts "Location: No location was listed"
             # end
-            
+
             if "#{deal.location}" == " "
-                puts "Location: Location unknown"
+                puts "Location:".colorize(:blue) + " Location unknown"
             else
-                puts "Location: #{deal.location}"
+                puts "Location:".colorize(:blue) + " #{deal.location}"
             end
-            puts "-------------------------------------------"
-            
+
             # puts "----test for crypto ---"
             # puts "#{deal.crypto}"
             # puts "#{deal.delivery}"
-            
-            
             # puts "#{deal.first_condition} #{deal.sec_condition}"
             
             if "#{deal.first_condition} && #{deal.sec_condition}" == " "
-                puts "Condition: Not listed."
+                puts "Condition:".colorize(:blue) + " Not listed."
             else
-                puts "#{deal.first_condition} #{deal.sec_condition}"
-            end
-            puts "-------------------------------------------"
-            
-            puts "#{deal.make} #{deal.brand}"
-            puts "-------------------------------------------"
-            puts "#{deal.number_condition_left} #{deal.number_condition_right}"
-            puts "-------------------------------------------"
-            puts "Posted in (yyyy/mm/dd): #{deal.time_posted}"
-            puts "-------------------------------------------"
-            puts "#{deal.post_id}"
-            puts "-------------------------------------------"
-            puts "Description: #{deal.description}"
-            puts "-------------------------------------------"
-            puts "Notce: #{deal.notice}"
-            puts "-------------------------------------------"
+                puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
+            end          
+            puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
+            puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+            puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
+            puts "#{deal.post_id}:".colorize(:blue) + " #{deal.num_id}"
+            puts "Description:".colorize(:blue) + " #{deal.description}"
+            puts "Notce:".colorize(:blue) + " #{deal.notice}"
             end
             puts "\n"
         end

@@ -38,7 +38,9 @@ class VidgameScraper::Scraper
             brand = card.css("p.attrgroup span").children[3].text.strip
             description = card.css("#postingbody").inner_text.gsub("  ", "").gsub("QR Code Link to This Post", "").gsub("\n", "").gsub("-", " -") #shwos desc.
             notice = card.css("ul.notices").css("li").text # shows the bullet point desc.
-            post_id = card.css("div.postinginfos").css("p.postinginfo").children[0].text
+            # post_id = card.css("div.postinginfos").css("p.postinginfo").children[0].text
+            post_id = card.css("div.postinginfos").css("p.postinginfo").children[0].text.split(":")[0]
+            num_id = card.css("div.postinginfos").css("p.postinginfo").children[0].text.split(":")[1].strip
             #################
             deal.title = title
             deal.price = price
@@ -53,6 +55,7 @@ class VidgameScraper::Scraper
             # deal.delivery = delivery
             deal.time_posted = time_posted
             deal.post_id = post_id
+            deal.num_id = num_id
             deal.notice = notice
             deal.description = description
 
