@@ -70,10 +70,9 @@ class VidgameScraper::CLI
             VidgameScraper::Scraper.scrape_items(category)
         end
 
-        puts "Here are the deals for #{category.name}:\n"
+        puts "Here are the deals for " + "#{category.name}:\n".colorize(:blue)
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
-            puts "-------------------------------------------"
             puts "\nItem Name: #{deal.title}"
             puts "-------------------------------------------"
             puts "Price: #{deal.price}"
