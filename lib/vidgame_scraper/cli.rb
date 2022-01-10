@@ -37,7 +37,7 @@ class VidgameScraper::CLI
 
     def list_items
         categories = VidgameScraper::Category.all
-            puts "\nChoose which Item you want to see the deals for:".colorize(:green)
+            puts "\nChoose which Item you want to see more info about:".colorize(:green)
             #lists items
             #responds to user input when they choose a category
 
@@ -65,7 +65,7 @@ class VidgameScraper::CLI
 
     def display_category_items(category)    #once they pick the item
         puts "\nOne moment please while the code loads...".colorize(:green)
-        
+        puts "\n"
         if category.deals.empty?
             VidgameScraper::Scraper.scrape_items(category)
         end
@@ -73,26 +73,53 @@ class VidgameScraper::CLI
         puts "Here are the deals for #{category.name}:\n"
         # binding.pry
         category.deals.each.with_index(1) do |deal, index|
-            
+            puts "-------------------------------------------"
             puts "\nItem Name: #{deal.title}"
+            puts "-------------------------------------------"
             puts "Price: #{deal.price}"
-
-            puts "-- Location being worked on --"
+            puts "-------------------------------------------"
             
-            if "#{deal.location}" == "#{deal.location}"
-                puts "Location: #{deal.location}"
+            # puts "-- Location being worked on --"
+            
+            # if "#{deal.location}" == "#{deal.location}"
+            #     puts "Location: #{deal.location}"
+            # else
+            #     puts "Location: No location was listed"
+            # end
+            
+            if "#{deal.location}" == " "
+                puts "Location: Location unknown"
             else
-                puts "Location: No location was listed"
+                puts "Location: #{deal.location}"
             end
-
-
-            puts "#{deal.first_condition} #{deal.sec_condition}"
+            puts "-------------------------------------------"
+            
+            # puts "----test for crypto ---"
+            # puts "#{deal.crypto}"
+            # puts "#{deal.delivery}"
+            
+            
+            # puts "#{deal.first_condition} #{deal.sec_condition}"
+            
+            if "#{deal.first_condition} && #{deal.sec_condition}" == " "
+                puts "Condition: Not listed."
+            else
+                puts "#{deal.first_condition} #{deal.sec_condition}"
+            end
+            puts "-------------------------------------------"
+            
             puts "#{deal.make} #{deal.brand}"
+            puts "-------------------------------------------"
             puts "#{deal.number_condition_left} #{deal.number_condition_right}"
+            puts "-------------------------------------------"
             puts "Posted in (yyyy/mm/dd): #{deal.time_posted}"
+            puts "-------------------------------------------"
             puts "#{deal.post_id}"
+            puts "-------------------------------------------"
             puts "Description: #{deal.description}"
+            puts "-------------------------------------------"
             puts "Notce: #{deal.notice}"
+            puts "-------------------------------------------"
             end
             puts "\n"
         end
