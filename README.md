@@ -1,6 +1,6 @@
 # VidgameScraper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/vidgame_scraper`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/vidgame_scraper`. To experiment with that code, run `bin/run` for an interactive prompt.
 
 This gem will allow you to Scrape the Craigslist website to look thorugh all the iems that are for sale in the Video Game section.
 
@@ -20,6 +20,12 @@ Or install it yourself as:
 
     $ gem install vidgame_scraper
 
+will need to install colorize and pry
+
+    $ gem install colorize
+
+for pry
+    $ gem install pry
 
 ## Development
 
