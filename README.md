@@ -25,6 +25,7 @@ will need to install colorize and pry
     $ gem install colorize
 
 for pry
+    
     $ gem install pry
 
 ## Development
