@@ -67,7 +67,7 @@ class VidgameScraper::CLI
     def display_category_items(category)    #once they pick the item
         puts "\nOne moment please while the code loads...".colorize(:green)
         puts "\n"
-        sleep 2
+        # sleep 1
         if category.deals.empty?
             VidgameScraper::Scraper.scrape_items(category)
         end
@@ -77,36 +77,41 @@ class VidgameScraper::CLI
         category.deals.each.with_index(1) do |deal, index|
             puts "\nItem Name:".colorize(:blue) + " #{deal.title}"
             puts "Price:".colorize(:blue) + " #{deal.price}"
-
-            # puts "-- Location being worked on --"
-            # if "#{deal.location}" == "#{deal.location}"
-            #     puts "Location: #{deal.location}"
-            # else
-            #     puts "Location: No location was listed"
-            # end
-
-            if "#{deal.location}" == " "
-                puts "Location:".colorize(:blue) + " Location unknown"
+            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- - 
+            if "#{deal.location}" == ""
+                puts "Location:".colorize(:yellow) + " Unknown"
             else
                 puts "Location:".colorize(:blue) + " #{deal.location}"
             end
-
-            # puts "----test for crypto ---"
-            # puts "#{deal.crypto}"
-            # puts "#{deal.delivery}"
-            # puts "#{deal.first_condition} #{deal.sec_condition}"
-            
-            if "#{deal.first_condition} && #{deal.sec_condition}" == " "
+            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+            if "#{deal.first_condition} && #{deal.sec_condition}" == ""
                 puts "Condition:".colorize(:blue) + " Not listed."
             else
                 puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
-            end          
+            end  
+            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- - 
             puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
-            puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+            if "#{deal.number_condition_left} && #{deal.number_condition_right}" != ""
+                puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+            else
+                puts "Model name / Number: Not listed"
+            end
+            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+            
+            
+            # if "#{deal.number_condition_three}" != ""
+            #     puts "#{deal.number_condition_three}"
+            # else
+            #     puts "Model name / Number: Not listed"
+            # end
+
+            # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+            # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
             puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
-            puts "#{deal.post_id}:".colorize(:blue) + " #{deal.num_id}"
+            puts "#{deal.post_id}:".capitalize.colorize(:blue) + " #{deal.num_id}"
             puts "Description:".colorize(:blue) + " #{deal.description}"
-            puts "Notce:".colorize(:blue) + " #{deal.notice}"
+            puts "Notce:".colorize(:red) + " #{deal.notice}"
             end
             puts "\n"
         end
