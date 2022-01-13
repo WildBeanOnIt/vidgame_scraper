@@ -99,12 +99,7 @@ class VidgameScraper::CLI
             end
             # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
             
-            
-            # if "#{deal.number_condition_three}" != ""
-            #     puts "#{deal.number_condition_three}"
-            # else
-            #     puts "Model name / Number: Not listed"
-            # end
+#line 34, 35, 32 need some work at times. Not always when it crashes says undefined.
 
             # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
             # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
