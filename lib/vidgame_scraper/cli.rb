@@ -1,5 +1,4 @@
 class VidgameScraper::CLI
-    # attr_reader :counter, :type
 
     def start   #instance method
         puts "\n         Welcome to my".colorize(:white) +  " CLI!".colorize(:blue)
@@ -89,7 +88,7 @@ class VidgameScraper::CLI
             # => (location)
             # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
             # puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
-            if "#{deal.first_condition}" == " "
+            if "#{deal.first_condition}" == ""
                 puts "No condition listed at all."
             end
 
@@ -107,6 +106,7 @@ class VidgameScraper::CLI
             
             # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
             puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+        
             
             puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
             

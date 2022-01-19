@@ -26,34 +26,22 @@ class VidgameScraper::Scraper
             title = card.css("#titletextonly").text.strip #shows the title of the item.
             price = card.css(".price").text
             location = card.css("h1.postingtitle").css("span.postingtitletext").css("small").text.strip  #shows the date when posted.
-            # if card.css("h1.postingtitle").css("span.postingtitletext").css("small").text.strip
-            #     location = card.css("h1.postingtitle").css("span.postingtitletext").css("small").text.strip
-            # else
-            #     location = "Loction: Not Available"
-            # end
             
             time_posted = card.css("#display-date").css("time").text.strip.split(" ")[0]
             
             condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
-            
-            # first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
 
-            if card.css("p.attrgroup span").children[0].text.strip
-                first_condition = card.css("p.attrgroup span").children[0].text.strip
+            first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
+
+            if card.css("p.attrgroup span").children[4] # check if selector exists
+                number_condition_left = card.css("p.attrgroup span").children[4].text.strip # get text of element
             else
-                first_condition = "No Info was listed."
+                number_condition_left = "Model not Available" # element did not exist
             end
 
             sec_condition = card.css("p.attrgroup span").children[1].text.strip # => "new"
 
-            if card.css("p.attrgroup span").children[4].text.strip # => "model name / number:"
-                number_condition_left = card.css("p.attrgroup span").children[4].text.strip # => "model name / number:" (1b/2b)
-                
-            else
-                number_condition_left = "Model Not Available"
-            end
-
-            number_condition_right = card.css("p.attrgroup span").children[5] ? card.css("p.attrgroup span").children[5].text.strip : "Model Name / Number: Information not Available" #"Where it was made from" (2b/2b)
+            number_condition_right = card.css("p.attrgroup span").children[5] ? card.css("p.attrgroup span").children[5].text.strip :  #"Where it was made from" (2b/2b)
             # if card.css("p.attrgroup span").children[5]
                 # number_condition_right = card.css("p.attrgroup span").children[5].text.strip
             # else
