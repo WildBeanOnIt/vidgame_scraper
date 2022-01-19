@@ -35,7 +35,15 @@ class VidgameScraper::Scraper
             time_posted = card.css("#display-date").css("time").text.strip.split(" ")[0]
             
             condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
-            first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
+            
+            # first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
+
+            if card.css("p.attrgroup span").children[0].text.strip
+                first_condition = card.css("p.attrgroup span").children[0].text.strip
+            else
+                first_condition = "No Info was listed."
+            end
+
             sec_condition = card.css("p.attrgroup span").children[1].text.strip # => "new"
 
             if card.css("p.attrgroup span").children[4].text.strip # => "model name / number:"

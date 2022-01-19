@@ -115,9 +115,10 @@ class VidgameScraper::CLI
             puts "Description:".colorize(:blue) + " #{deal.description}"
             
             puts "Notce:".colorize(:red) + " #{deal.notice}"
-
+            
+            puts "\n"
+            show_list_again
         end
-        puts "\n"
         # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
         # if "#{deal.first_condition} && #{deal.sec_condition}" == ""
         #     puts "Condition:".colorize(:blue) + " Not listed."
@@ -142,6 +143,7 @@ class VidgameScraper::CLI
         case answers
         when "y"
             menu
+            choose_item
         when "n"
             exit_program
         else
@@ -149,7 +151,21 @@ class VidgameScraper::CLI
             sub_out
         end
     end
-
+    def show_list_again 
+        puts "Would you like to see the Menu again?".colorize(:white) + " (" + "'y'".colorize(:green) + "/" + "'n'".colorize(:red) + ")" 
+        answers = gets.strip.downcase
+        case answers
+        when "y"
+            list_items
+            choose_item
+        when "n"
+            exit_program
+        else
+            puts "Invalid input. Please try again".colorize(:red)
+            sub_out
+        end
+    end
+    
     def exit_program
         puts "Thank you for visiting! Goodbye.".colorize(:red)
     end
