@@ -70,73 +70,49 @@ class VidgameScraper::CLI
         if category.deals.empty?
             VidgameScraper::Scraper.scrape_items(category)
         end
+            puts "Here are the deals for " + "#{category.name}:\n".colorize(:yellow)
+            # binding.pry
+            category.deals.each.with_index(1) do |deal, index|
+                puts "\nItem Name:".colorize(:blue) + " #{deal.title}"
+                    # => Item name: XYZ
+                puts "Price:".colorize(:blue) + " #{deal.price}"
+                    # => Price : 00
+                # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+                # puts "Location: #{deal.location}" 
+                if "#{deal.location}" == ""
+                    puts "Location:".colorize(:yellow) + " Not listed.".colorize(:red)
+                else
+                    puts "Location:".colorize(:blue) + " #{deal.location}"
+                end
+                # => (location)
+                # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+                
+                puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
+                # => "Condition: ABC"
+                # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
+                # puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
+                if "#{deal.make}" == ""
+                    puts "Make / Manufacturer:".colorize(:yellow) + " Not listed."
+                else
+                    puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
+                end
+                
+                puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+                
+                puts "#{deal.dimensions_one}".colorize(:blue) + " #{deal.dimensions_two}"
+                
+                puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
+                
+                puts "#{deal.post_id}:".capitalize.colorize(:blue) + " #{deal.num_id}"
+                
+                puts "Description:".colorize(:blue) + " #{deal.description}"
+                
+                puts "Notce:".colorize(:red) + " #{deal.notice}"
 
-        puts "Here are the deals for " + "#{category.name}:\n".colorize(:yellow)
-        # binding.pry
-        category.deals.each.with_index(1) do |deal, index|
-            puts "\nItem Name:".colorize(:blue) + " #{deal.title}"
-                # => Item name: XYZ
-            puts "Price:".colorize(:blue) + " #{deal.price}"
-                # => Price : 00
-            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-            # puts "Location: #{deal.location}" 
-            if "#{deal.location}" == ""
-                puts "Location:".colorize(:yellow) + " Unknown".colorize(:red)
-            else
-                puts "Location:".colorize(:blue) + " #{deal.location}"
+                
+                puts "\n"
+                show_list_again
             end
-            # => (location)
-            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-            # puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
-            if "#{deal.first_condition}" == ""
-                puts "No condition listed at all."
-            end
-
-            if "#{deal.first_condition} && #{deal.sec_condition}" == ""
-                puts "Conditions:".colorize(:blue) + " not available".colorize(:red)
-            else
-                puts "#{deal.first_condition}".colorize(:blue)+ " #{deal.sec_condition}"
-            end
-            # => "Condition: ABC"
-            # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-            # puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
-            if "#{deal.make}" == ""
-                puts "Make / Manufacturer:".colorize(:yellow) + " Not listed."
-            else
-                puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
-            end
-            
-            puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
-            
-            puts "#{deal.dimensions_one}".colorize(:blue) + " #{deal.dimensions_two}"
-            
-            puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
-            
-            puts "#{deal.post_id}:".capitalize.colorize(:blue) + " #{deal.num_id}"
-            
-            puts "Description:".colorize(:blue) + " #{deal.description}"
-            
-            puts "Notce:".colorize(:red) + " #{deal.notice}"
-
-            
-            puts "\n"
-            show_list_again
-        end
-        # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-        # if "#{deal.first_condition} && #{deal.sec_condition}" == ""
-        #     puts "Condition:".colorize(:blue) + " Not listed."
-        # else
-        #     puts "#{deal.first_condition}".colorize(:blue) + " #{deal.sec_condition}"
-        # end  
-        # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- - 
-        # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-        # if "#{deal.number_condition_left} && #{deal.number_condition_right}" != ""
-        #     puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
-        # else
-        #     puts "Model name / Number: Not listed"
-        # end
-        # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-#line 34, 35, 32 need some work at times. Not always when it crashes says undefined.
         end
     end
 
@@ -170,5 +146,5 @@ class VidgameScraper::CLI
     end
     
     def exit_program
-        puts "Thank you for visiting! Goodbye.".colorize(:red)
+        puts "Thank you for Visiting! Goodbye.".colorize(:red)
     end

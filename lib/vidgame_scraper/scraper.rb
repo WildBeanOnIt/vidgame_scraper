@@ -35,14 +35,14 @@ class VidgameScraper::Scraper
             if card.css("p.attrgroup span").children[0]
                 first_condition = card.css("p.attrgroup span").children[0].text.strip
             else
-                first_condition = "Condition:"
+                first_condition = "Condition:".colorize(:yellow)
             end
             
             # sec_condition = card.css("p.attrgroup span").children[1].text.strip # => "new"
             if card.css("p.attrgroup span").children[1]
                 sec_condition = card.css("p.attrgroup span").children[1].text.strip
             else
-                sec_condition = "Not listed."
+                sec_condition = "Not listed.".colorize(:red)
             end
 
             if card.css("p.attrgroup span").children[4] # check if selector exists
@@ -56,7 +56,7 @@ class VidgameScraper::Scraper
             if card.css("p.attrgroup span").children[5]
                 number_condition_right = card.css("p.attrgroup span").children[5].text.strip
             else
-                number_condition_right = "Not listed."
+                number_condition_right = "Not listed.".colorize(:red)
             end
             # if card.css("p.attrgroup span").children[5]
             
@@ -85,7 +85,7 @@ class VidgameScraper::Scraper
             if card.css("p.attrgroup span").children[3]
                 brand = card.css("p.attrgroup span").children[3].text.strip
             else
-                brand = "Not listed."
+                brand = "Not listed.".colorize(:red)
             end
             
             # dimensions_one = card.css("p.attrgroup span").children[6].text.strip # => "size / dimensions: 15,75x18.1x31.5"
@@ -99,7 +99,7 @@ class VidgameScraper::Scraper
             if card.css("p.attrgroup span").children[7]
                 dimensions_two = card.css("p.attrgroup span").children[7].text.strip
             else
-                dimensions_two = "Size Not listed."
+                dimensions_two = "Size Not listed.".colorize(:red)
             end
             
             description = card.css("#postingbody").inner_text.gsub("  ", "").gsub("QR Code Link to This Post", "").gsub("\n", "").gsub("-", " -") #shwos desc.
