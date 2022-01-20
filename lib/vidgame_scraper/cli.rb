@@ -99,14 +99,16 @@ class VidgameScraper::CLI
             end
             # => "Condition: ABC"
             # - -- - -- - -- - - -- - -- - - -- - - -- - - - -- - -- - -- -
-            puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
-            # => "make / manufacturer: microsoft"
-
-            # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
+            # puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
+            if "#{deal.make}" == ""
+                puts "Make / Manufacturer:".colorize(:yellow) + " Not listed."
+            else
+                puts "#{deal.make}".colorize(:blue) + " #{deal.brand}"
+            end
             
-            # puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
             puts "#{deal.number_condition_left}".colorize(:blue) + " #{deal.number_condition_right}"
-        
+            
+            puts "#{deal.dimensions_one}".colorize(:blue) + " #{deal.dimensions_two}"
             
             puts "Posted in (yyyy/mm/dd):".colorize(:blue) + " #{deal.time_posted}"
             
@@ -115,6 +117,7 @@ class VidgameScraper::CLI
             puts "Description:".colorize(:blue) + " #{deal.description}"
             
             puts "Notce:".colorize(:red) + " #{deal.notice}"
+
             
             puts "\n"
             show_list_again

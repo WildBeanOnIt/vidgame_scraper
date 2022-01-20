@@ -31,32 +31,76 @@ class VidgameScraper::Scraper
             
             condition = card.css("p.attrgroup").text.gsub("  ","").gsub("\n", "")
 
-            first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
+            # first_condition = card.css("p.attrgroup span").children[0].text.strip # => "condition: "
+            if card.css("p.attrgroup span").children[0]
+                first_condition = card.css("p.attrgroup span").children[0].text.strip
+            else
+                first_condition = "Condition:"
+            end
+            
+            # sec_condition = card.css("p.attrgroup span").children[1].text.strip # => "new"
+            if card.css("p.attrgroup span").children[1]
+                sec_condition = card.css("p.attrgroup span").children[1].text.strip
+            else
+                sec_condition = "Not listed."
+            end
 
             if card.css("p.attrgroup span").children[4] # check if selector exists
                 number_condition_left = card.css("p.attrgroup span").children[4].text.strip # get text of element
             else
-                number_condition_left = "Model not Available" # element did not exist
+                number_condition_left = "Model Name / Number:" # element did not exist
             end
 
-            sec_condition = card.css("p.attrgroup span").children[1].text.strip # => "new"
 
-            number_condition_right = card.css("p.attrgroup span").children[5] ? card.css("p.attrgroup span").children[5].text.strip :  #"Where it was made from" (2b/2b)
+            # number_condition_right = card.css("p.attrgroup span").children[5] ? card.css("p.attrgroup span").children[5].text.strip :  #"Where it was made from" (2b/2b)
+            if card.css("p.attrgroup span").children[5]
+                number_condition_right = card.css("p.attrgroup span").children[5].text.strip
+            else
+                number_condition_right = "Not listed."
+            end
             # if card.css("p.attrgroup span").children[5]
-                # number_condition_right = card.css("p.attrgroup span").children[5].text.strip
-            # else
-            #     number_condition_right = 
-            # end
-            # # number_condition_three = card.css("p.attrgroup span")[2].text # => "model name / number: Xbox one X"
             
+            # crypto = card.css("p.attrgroup span").children[0].text.strip # => "cryptocurrency ok"
+            if card.css("p.attrgroup span").children[0]
+                crypto = card.css("p.attrgroup span").children[0].text.strip
+            else
+                crypto = "Crypto Currency: Not listed"
+            end
+
+            # delivery = card.css("p.attrgroup span").children[1].text # => "delivery available"
+            if card.css("p.attrgroup span").children[1]
+                delivery = card.css("p.attrgroup span").children[1].text
+            else
+                delivery = "Delivery: Not listed."
+            end
+
+            # make = card.css("p.attrgroup span").children[2].text.strip # => "make / manufacturer:" (1a/2a)
+            if card.css("p.attrgroup span").children[2]
+                make = card.css("p.attrgroup span").children[2].text.strip
+            else
+                make = "Make / Manufacturer:"
+            end
             
-            crypto = card.css("p.attrgroup span").children[0].text.strip # => "cryptocurrency ok"
-            delivery = card.css("p.attrgroup span").children[1].text # => "delivery available"
-            make = card.css("p.attrgroup span").children[2].text.strip # => "make / manufacturer:" (1a/2a)
-            brand = card.css("p.attrgroup span").children[3].text.strip # => "microsoft" (2a/2a)
+            # brand = card.css("p.attrgroup span").children[3].text.strip # => "microsoft" (2a/2a)
+            if card.css("p.attrgroup span").children[3]
+                brand = card.css("p.attrgroup span").children[3].text.strip
+            else
+                brand = "Not listed."
+            end
             
-            # # dimensions = card.css("p.attrgroup span")[1].text.strip # => "size / dimensions: 15,75x18.1x31.5"
-            
+            # dimensions_one = card.css("p.attrgroup span").children[6].text.strip # => "size / dimensions: 15,75x18.1x31.5"
+            if card.css("p.attrgroup span").children[6]
+                dimensions_one = card.css("p.attrgroup span").children[6].text.strip
+            else
+                dimensions_one = "Size / Dimensions:"
+            end
+
+            # dimensions_two = card.css("p.attrgroup span").children[7].text.strip # => "15,75x18.1x31.5"
+            if card.css("p.attrgroup span").children[7]
+                dimensions_two = card.css("p.attrgroup span").children[7].text.strip
+            else
+                dimensions_two = "Size Not listed."
+            end
             
             description = card.css("#postingbody").inner_text.gsub("  ", "").gsub("QR Code Link to This Post", "").gsub("\n", "").gsub("-", " -") #shwos desc.
             notice = card.css("ul.notices").css("li").text # shows the bullet point desc.
@@ -82,6 +126,8 @@ class VidgameScraper::Scraper
             deal.num_id = num_id
             deal.notice = notice
             deal.description = description
+            deal.dimensions_two = dimensions_two
+            deal.dimensions_one = dimensions_one
 
             category.add_deal(deal)
             # binding.pry
