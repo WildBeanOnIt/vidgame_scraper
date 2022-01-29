@@ -39,7 +39,6 @@ class VidgameScraper::CLI
             puts "\nChoose which Item you want to see more info about:".colorize(:green)
             puts "\n"
             #responds to user input when they choose a category
-
         categories.each.with_index(1) do |category, index|
             # sleep 1
             puts "#{index}. #{category.name}"
@@ -130,6 +129,7 @@ class VidgameScraper::CLI
             sub_out
         end
     end
+    
     def show_list_again 
         puts "Would you like to see the Menu again?".colorize(:white) + " (" + "'y'".colorize(:green) + "/" + "'n'".colorize(:red) + ")" 
         answers = gets.strip.downcase

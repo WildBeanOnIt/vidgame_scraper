@@ -26,4 +26,4 @@ class VidgameScraper::Category
     end
 
 
-end 
+end
